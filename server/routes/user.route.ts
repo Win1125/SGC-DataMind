@@ -9,7 +9,8 @@ import {
     socialAuth, 
     updateUserInfo, 
     updatePassword,
-    updateProfilePicture
+    updateProfilePicture,
+    getAllUsers
 } from '../controllers/user.controller';
 import { isAuthenticated, validateRole } from '../middleware/auth';
 
@@ -25,6 +26,7 @@ userRouter.post('/login-user', loginUser);
 userRouter.get('/logout', isAuthenticated, logoutUser);
 userRouter.get('/refresh', updateAccessToken);
 userRouter.get('/me', isAuthenticated, getUserInfo);
+userRouter.get('/get-users', isAuthenticated, validateRole("admin"), getAllUsers);
 
 // PUT
 userRouter.put('/update-user', isAuthenticated, updateUserInfo);

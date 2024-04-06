@@ -6,6 +6,7 @@ import {
     addReplyToReview,
     addReview,
     editCourse, 
+    getallCourses, 
     getAllCourses, 
     getCourseByUser, 
     getSingleCourse, 
@@ -26,6 +27,7 @@ courseRouter.post('/create-course', isAuthenticated, validateRole("admin"), uplo
 courseRouter.get('/get-course/:id', getSingleCourse);
 courseRouter.get('/get-courses', getAllCourses);
 courseRouter.get('/get-course-content/:id', isAuthenticated, getCourseByUser);
+courseRouter.get('/get-all-courses', isAuthenticated, validateRole("admin"), getallCourses);
 
 // PUT
 courseRouter.put('/edit-course/:id', isAuthenticated, validateRole("admin"), editCourse);
