@@ -10,7 +10,8 @@ import {
     updateUserInfo, 
     updatePassword,
     updateProfilePicture,
-    getAllUsers
+    getAllUsers,
+    updateUserRole
 } from '../controllers/user.controller';
 import { isAuthenticated, validateRole } from '../middleware/auth';
 
@@ -32,6 +33,7 @@ userRouter.get('/get-users', isAuthenticated, validateRole("admin"), getAllUsers
 userRouter.put('/update-user', isAuthenticated, updateUserInfo);
 userRouter.put('/update-password', isAuthenticated, updatePassword);
 userRouter.put('/update-avatar', isAuthenticated, updateProfilePicture);
+userRouter.put('/update-role', isAuthenticated, validateRole("admin"), updateUserRole);
 
 // DELETE
 
