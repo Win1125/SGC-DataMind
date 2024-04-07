@@ -21,10 +21,7 @@ app.use(cors({
 }));
 
 //Routes
-app.use("/api/v1",userRouter);
-app.use("/api/v1",courseRouter);
-app.use("/api/v1/",orderRouter);
-app.use("/api/v1/",notificationRouter);
+app.use("/api/v1", userRouter,courseRouter,orderRouter,notificationRouter);
 
 //Testing API
 app.get("/test", (req:Request, res:Response, next:NextFunction) => {
