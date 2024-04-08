@@ -196,7 +196,7 @@ export const updateAccessToken = CatchAsyncError(async (req: Request, res: Respo
         const session = await redis.get(decoded.id as string);
 
         if (!session) {
-            return next(new ErrorHandler(message, 400));
+            return next(new ErrorHandler("Please Login for access this resources!", 400));
         }
 
         const user = JSON.parse(session);
@@ -205,14 +205,19 @@ export const updateAccessToken = CatchAsyncError(async (req: Request, res: Respo
             expiresIn: "5m"
         });
 
-        const refreshToken = jwt.sign({ id: user._id }, process.env.REFRESH_TOKEN as string, {
-            expiresIn: "3d"
-        });
+        const refreshToken = jwt.sign(
+            { id: user._id }, 
+            process.env.REFRESH_TOKEN as string, 
+            { expiresIn: "3d"}
+        );
 
         req.user = user;
 
         res.cookie("access_token", accessToken, accessTokenOptions)
         res.cookie("refresh_token", refreshToken, refreshTokenOptions)
+
+                                                        //2 Days in seconds
+        await redis.set(user._id, JSON.stringify(user), "EX", 172800);
 
         res.status(200).json({
             status: "success",
