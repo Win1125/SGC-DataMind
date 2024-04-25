@@ -12,7 +12,7 @@ import { getAllUsersService, getUserById, updateUserRoleService } from "../servi
 import cloudinary from "cloudinary";
 require('dotenv').config();
 
-
+//#region Registro
 //Register the User
 interface IRegisterUser {
     name: string;
@@ -128,6 +128,10 @@ export const activateUser = CatchAsyncError(async (req: Request, res: Response, 
     }
 });
 
+//#endregion
+
+//#region Inicio de Sesión
+
 // Login User
 interface ILoginRequest {
     email: string;
@@ -206,8 +210,8 @@ export const updateAccessToken = CatchAsyncError(async (req: Request, res: Respo
         });
 
         const refreshToken = jwt.sign(
-            { id: user._id }, 
-            process.env.REFRESH_TOKEN as string, 
+            { id: user._id },
+            process.env.REFRESH_TOKEN as string,
             { expiresIn: "3d"}
         );
 
@@ -261,6 +265,10 @@ export const socialAuth = CatchAsyncError(async (req: Request, res: Response, ne
     }
 })
 
+//#endregion
+
+//#region Actualizar Usuario
+
 // Update user info
 interface IUpdateUserInfo {
     name?: string;
@@ -295,8 +303,6 @@ export const updateUserInfo = CatchAsyncError(async (req: Request, res: Response
             user
         })
 
-
-
     } catch (error: any) {
         return next(new ErrorHandler(error.message, 400));
     }
@@ -310,7 +316,7 @@ interface IUpdatePassword {
 
 export const updatePassword = CatchAsyncError(async (req: Request, res: Response, next: NextFunction) => {
     try {
-        
+
         const { oldPassword, newPassword } = req.body as IUpdatePassword;
         if (!oldPassword || !newPassword) {
             return next(new ErrorHandler("Please enter old and new password", 400))
@@ -336,7 +342,7 @@ export const updatePassword = CatchAsyncError(async (req: Request, res: Response
             user
         })
 
-    } catch (error:any) {   
+    } catch (error:any) {
         return next(new ErrorHandler(error.message, 400));
     }
 })
@@ -351,7 +357,7 @@ interface IUpdateProfilePicture {
 
 export const updateProfilePicture = CatchAsyncError(async (req: Request, res: Response, next: NextFunction) => {
     try {
-        
+
         const { avatar } = req.body;
 
         const userId = req.user?._id;
@@ -363,14 +369,13 @@ export const updateProfilePicture = CatchAsyncError(async (req: Request, res: Re
             if(user?.avatar?.public_id){
                 // Fisrt Delete the old image
                 await cloudinary.v2.uploader.destroy(user?.avatar?.public_id);
-                
 
                 // Then upload the new image to the cloudinary
                 const myCloud = await cloudinary.v2.uploader.upload(avatar, {
                     folder:"avatars",
                     width: 150
                 });
-    
+
                 user.avatar = {
                     public_id: myCloud.public_id,
                     url: myCloud.url
@@ -380,7 +385,7 @@ export const updateProfilePicture = CatchAsyncError(async (req: Request, res: Re
                     folder:"avatars",
                     width: 150
                 });
-    
+
                 user.avatar = {
                     public_id: myCloud.public_id,
                     url: myCloud.url
@@ -395,18 +400,22 @@ export const updateProfilePicture = CatchAsyncError(async (req: Request, res: Re
             success: true,
             user
         })
-        
+
     } catch (error: any) {
         return next(new ErrorHandler(error.message, 400));
     }
 })
+
+//#endregion
+
+//#region Admin Operaciones
 
 // Get All Users -- only admin
 export const getAllUsers = CatchAsyncError(async (req:Request, res:Response, next:NextFunction) => {
     try {
 
         getAllUsersService(res);
-        
+
     } catch (error:any) {
         return next(new ErrorHandler(error.message, 400));
     }
@@ -418,7 +427,7 @@ export const updateUserRole = CatchAsyncError(async (req:Request, res:Response, 
 
         const { id, role } = req.body;
         updateUserRoleService(res, id, role);
-        
+
     } catch (error:any) {
         return next(new ErrorHandler(error.message, 400));
     }
@@ -443,8 +452,10 @@ export const deleteUser = CatchAsyncError(async (req:Request, res:Response, next
             success: true,
             message: "User deleted successfully"
         })
-        
+
     } catch (error:any) {
         return next(new ErrorHandler(error.message, 400));
     }
 });
+
+//#endregion

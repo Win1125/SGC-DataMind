@@ -120,7 +120,7 @@ const courseSchema = new Schema<ICourse>({
     demoUrl: {
         type: String,
         required: true,
-    }, 
+    },
     benefits: [{ title: String }],
     prerequisites: [{ title: String }],
     reviews: [reviewSchema],

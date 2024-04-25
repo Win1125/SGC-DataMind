@@ -62,14 +62,14 @@ const userSchema: Schema<IUser> = new mongoose.Schema({
     ],
 }, {timestamps:true});
 
-// Hash Password before saving 
+// Hash Password before saving
 userSchema.pre<IUser>('save', async function (next) {
     if(!this.isModified('password')){
         next();
     }
     this.password = await bcrypt.hash(this.password, 10);
     next();
-}); 
+});
 
 // Sign Access Token
 userSchema.methods.SignAccessToken = function () {
@@ -78,7 +78,7 @@ userSchema.methods.SignAccessToken = function () {
     });
 }
 
-// Refresh Token 
+// Refresh Token
 userSchema.methods.SignRefreshToken = function () {
     return jwt.sign({id: this._id}, process.env.REFRESH_TOKEN || '', {
         expiresIn: "3d"

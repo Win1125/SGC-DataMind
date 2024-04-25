@@ -1,12 +1,12 @@
 import express from 'express';
-import { 
-    isAuthenticated, 
-    validateRole 
+import {
+    isAuthenticated,
+    validateRole
 } from '../middleware/auth';
-import { 
-    getCourseAnalytics, 
-    getOrderAnalytics, 
-    getUserAnalytics 
+import {
+    getCourseAnalytics,
+    getOrderAnalytics,
+    getUserAnalytics
 } from '../controllers/analytics.controller';
 const analyticsRouter = express.Router();
 

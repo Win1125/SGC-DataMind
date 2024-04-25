@@ -13,7 +13,7 @@ import { getAllOrdersService, newOrder } from "../services/order.service";
 // Create an order
 export const createOrder = CatchAsyncError(async (req:Request, res:Response, next:NextFunction) => {
     try {
-        
+
         const { courseId, payment_info } = req.body as IOrder;
 
         const user = await userModel.findById(req.user?._id);
@@ -86,7 +86,7 @@ export const getAllOrders = CatchAsyncError(async (req:Request, res:Response, ne
     try {
 
         getAllOrdersService(res);
-        
+
     } catch (error:any) {
         return next(new ErrorHandler(error.message, 400));
     }

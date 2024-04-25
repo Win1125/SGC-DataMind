@@ -16,7 +16,7 @@ export const getUserAnalytics = CatchAsyncError(async (req:Request, res:Response
             success: true,
             users
         });
-        
+
     } catch (error:any) {
         return next(new ErrorHandler(error.message, 500));
     }
@@ -32,7 +32,7 @@ export const getCourseAnalytics = CatchAsyncError(async (req:Request, res:Respon
             success: true,
             courses
         });
-        
+
     } catch (error:any) {
         return next(new ErrorHandler(error.message, 500));
     }
@@ -48,7 +48,7 @@ export const getOrderAnalytics = CatchAsyncError(async (req:Request, res:Respons
             success: true,
             orders
         });
-        
+
     } catch (error:any) {
         return next(new ErrorHandler(error.message, 500));
     }

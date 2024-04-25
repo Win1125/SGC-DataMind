@@ -336,8 +336,8 @@ export const addReview = CatchAsyncError(async (req: Request, res: Response, nex
             avg += rev.rating;
         });
         if (course) {
-            // One exxample we have 2 reviews one 
-            // is 5 another one is 4 so 
+            // One exxample we have 2 reviews one
+            // is 5 another one is 4 so
             // math working like this = 9 / 2 = 4.5 ratings
             course.ratings = avg / course.reviews.length;
         }
@@ -408,7 +408,7 @@ export const getallCourses = CatchAsyncError(async (req:Request, res:Response, n
     try {
 
         getAllCoursesService(res);
-        
+
     } catch (error:any) {
         return next(new ErrorHandler(error.message, 400));
     }
@@ -433,7 +433,7 @@ export const deleteCourse = CatchAsyncError(async (req:Request, res:Response, ne
             success: true,
             message: "Course deleted successfully"
         })
-        
+
     } catch (error:any) {
         return next(new ErrorHandler(error.message, 400));
     }

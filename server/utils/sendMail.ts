@@ -30,8 +30,8 @@ const sendMail = async (options: IEmailOptions): Promise<void> => {
     const html:string = await ejs.renderFile(templatePath, data);
 
     const mailOptions = {
-        from: process.env.SMTP_MAIL,
-        to: email, 
+        from: `Admin of SGC UD ${process.env.SMTP_MAIL}`,
+        to: email,
         subject,
         html
     };
