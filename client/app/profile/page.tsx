@@ -20,7 +20,7 @@ const page:FC<Props> = (props) => {
     <div>
       <Protected>
         <Heading
-          title={`${user?.name} profile`}
+          title={`${user?.name} profile - DataMind`}
           description=""
           keywords="Programming, Software Engineering, Universidad, Distrital, Francisco José de Caldas, Universidad Distrital, Universidad Distrital Francisco José de Caldas, SGC, Sistema, Gestión, Conocimiento, Sistema de Gestión de Conocimiento"
         />

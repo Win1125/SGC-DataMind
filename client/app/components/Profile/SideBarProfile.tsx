@@ -43,7 +43,7 @@ const SideBarProfile:FC<Props> = ({user, active, avatar, setActive, logoutHandle
         }`}
         onClick={() => setActive(2)}
         >
-        <RiLockPasswordLine size={20} fill='#fff' />
+        <RiLockPasswordLine size={20} className="dark:text-white text-black" />
         <h5 className='pl-2 800px:block hidden font-Poppins dark:text-white text-black'>
           Change Password
         </h5>
@@ -55,7 +55,7 @@ const SideBarProfile:FC<Props> = ({user, active, avatar, setActive, logoutHandle
         }`}
         onClick={() => setActive(3)}
         >
-        <SiCoursera size={20} fill='#fff' />
+        <SiCoursera size={20} className="dark:text-white text-black" />
         <h5 className='pl-2 800px:block hidden font-Poppins dark:text-white text-black'>
           Enrolled Courses
         </h5>
@@ -66,9 +66,9 @@ const SideBarProfile:FC<Props> = ({user, active, avatar, setActive, logoutHandle
           className={`w-full flex items-center px-3 py-4 cursor-pointer ${
             active === 6 ? 'dark:bg-slate-800 bg-white' : 'bg-transparent'
           }`}
-          href={'/admin-dashboard'}
+          href={'/admin'}
           >
-          <MdOutlineAdminPanelSettings size={20} fill='#fff' />
+          <MdOutlineAdminPanelSettings size={20} className="dark:text-white text-black" />
           <h5 className='pl-2 800px:block hidden font-Poppins dark:text-white text-black'>
             Admin DashBoard
           </h5>
@@ -81,7 +81,7 @@ const SideBarProfile:FC<Props> = ({user, active, avatar, setActive, logoutHandle
         }`}
         onClick={() => logoutHandler()}
         >
-        <AiOutlineLogout size={20} fill='#fff' />
+        <AiOutlineLogout size={20} className="dark:text-white text-black" />
         <h5 className='pl-2 800px:block hidden font-Poppins dark:text-white text-black'>
           Log Out
         </h5>
