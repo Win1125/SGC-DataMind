@@ -4,7 +4,7 @@ import React, { FC, useState } from 'react'
 import Protected from '../hooks/useProtected';
 import Heading from '../utils/Heading';
 import Header from '../components/Header';
-import Profile from '../components/Profile';
+import Profile from '../components/Profile/Profile';
 import { useSelector } from 'react-redux';
 
 type Props = {}
